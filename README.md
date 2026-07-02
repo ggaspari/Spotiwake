@@ -2,6 +2,8 @@
 
 Aplicativo de bandeja (system tray) para Windows 11 que **impede o computador de entrar em suspensão enquanto o Spotify estiver tocando**. Quando a música para (ou o Spotify é fechado), o controle de energia volta ao normal e o Windows pode suspender como de costume.
 
+Projeto de **código aberto** sob a licença MIT — todo o código-fonte está neste repositório e pode ser auditado e compilado por qualquer pessoa.
+
 ## Como funciona
 
 A cada 5 segundos o Spotiwake verifica se o aplicativo desktop do Spotify está reproduzindo algo, usando duas estratégias combinadas:
@@ -36,6 +38,24 @@ As preferências ficam salvas em `%AppData%\Spotiwake\settings.json`.
 O aplicativo é **portátil**: é um único `Spotiwake.exe` autossuficiente — não tem instalador, não precisa do .NET nem de nada mais instalado. Basta salvar o arquivo em qualquer pasta e executar. Para remover, é só apagar o arquivo (e, se tiver ativado "Iniciar com o Windows", desmarcar a opção no menu antes).
 
 Todas as versões ficam na página de [releases](https://github.com/ggaspari/Spotiwake/releases). Builds de desenvolvimento também são gerados a cada push, na aba **Actions** (artefato `Spotiwake-win-x64`).
+
+## Aviso do SmartScreen e verificação de integridade
+
+Na primeira execução, o **Windows SmartScreen pode exibir um alerta** ("O Windows protegeu o computador"). Isso acontece porque o executável não tem assinatura digital de um certificado comercial — não porque haja algo de errado com ele. Para executar, clique em **Mais informações → Executar assim mesmo**.
+
+Este é um projeto de código aberto: se preferir não confiar no binário, você pode [compilar a partir do código-fonte](#compilando-localmente) e obter o mesmo aplicativo.
+
+Você também pode verificar se o arquivo baixado é exatamente o que foi publicado, conferindo o hash SHA-256 no PowerShell:
+
+```powershell
+Get-FileHash .\Spotiwake.exe -Algorithm SHA256
+```
+
+| Versão | SHA-256 do `Spotiwake.exe` |
+|---|---|
+| v1.0.0 | `0680322cdfca317f7cdf731c3609d2b29d3c999f80b163d2947bd578f443dc95` |
+
+A partir da próxima versão, cada release também inclui um arquivo `Spotiwake.exe.sha256` gerado automaticamente pelo CI, com o hash correspondente.
 
 ## Compilando localmente
 

@@ -43,6 +43,14 @@ jobs:
           name: Spotiwake-win-x64
           path: publish/Spotiwake.exe
 
+      - name: Compute SHA-256
+        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash publish/Spotiwake.exe -Algorithm SHA256).Hash.ToLower()
+          "$hash  Spotiwake.exe" | Out-File publish/Spotiwake.exe.sha256 -Encoding ascii -NoNewline
+          @('### SHA-256', '```', "$hash  Spotiwake.exe", '```') | Out-File release-body.md -Encoding utf8
+
       - name: Create release
         if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
         uses: softprops/action-gh-release@v2
@@ -50,4 +58,7 @@ jobs:
           tag_name: ${{ inputs.release_tag || github.ref_name }}
           name: Spotiwake ${{ inputs.release_tag || github.ref_name }}
           generate_release_notes: true
-          files: publish/Spotiwake.exe
+          body_path: release-body.md
+          files: |
+            publish/Spotiwake.exe
+            publish/Spotiwake.exe.sha256

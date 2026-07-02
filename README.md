@@ -31,7 +31,11 @@ As preferências ficam salvas em `%AppData%\Spotiwake\settings.json`.
 
 ## Download
 
-Cada push no GitHub gera um executável pelo GitHub Actions: abra a aba **Actions**, escolha a execução mais recente do workflow **Build** e baixe o artefato `Spotiwake-win-x64`. É um único `Spotiwake.exe` autossuficiente (não precisa instalar o .NET).
+⬇️ **[Baixar Spotiwake.exe (última versão)](https://github.com/ggaspari/Spotiwake/releases/latest/download/Spotiwake.exe)**
+
+O aplicativo é **portátil**: é um único `Spotiwake.exe` autossuficiente — não tem instalador, não precisa do .NET nem de nada mais instalado. Basta salvar o arquivo em qualquer pasta e executar. Para remover, é só apagar o arquivo (e, se tiver ativado "Iniciar com o Windows", desmarcar a opção no menu antes).
+
+Todas as versões ficam na página de [releases](https://github.com/ggaspari/Spotiwake/releases). Builds de desenvolvimento também são gerados a cada push, na aba **Actions** (artefato `Spotiwake-win-x64`).
 
 ## Compilando localmente
 
